@@ -135,7 +135,7 @@ function App() {
             {textcontainer_var.export_text(LangageInt,TextIndex,0)}
           </Link>
           <Link to="/Game" className ="navbar-button">
-            {textcontainer_var.export_text(LangageInt,TextIndex,1)}
+            {textcontainer_var.export_text(LangageInt,TextIndex,1)+'i'}
           </Link>
           <button onClick={change_Langage} className='language-button'>​</button>
         </nav>
