@@ -62,7 +62,12 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  translate: 0px -70px;
+  /*translate: 0px -70px;*/
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
   /*
 1032
 369*/
@@ -126,4 +131,11 @@ font-style: normal;*/
 .sticky {
   position: sticky;
   top: 0;
+}
+
+@media screen and (max-width : 1000px) {
+  .chip-crypt{
+    padding:9% 25.2% ;
+  }
+
 }
