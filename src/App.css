@@ -133,9 +133,9 @@ font-style: normal;*/
   top: 0;
 }
 
-@media screen and (max-width : 1000px) {
+@media screen and (max-width : 610px) {
   .chip-crypt{
-    padding:9% 25.2% ;
+    padding:13.5% 37.8% ;
   }
 
 }
