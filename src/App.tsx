@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react' //React,
 import './App.css'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import Game from './Game.tsx';
 import Vide2 from './Vide2.tsx';
 import Vide3 from './Vide3.tsx';
@@ -125,7 +125,9 @@ function App() {
   }
   
 //<Vide3 onClickFunc={testclick}></Vide3>
-
+  const get_language_string = () => {
+    return "/flags/EN.png"
+  }
   return (
     <BrowserRouter>
       <header>
@@ -135,9 +137,10 @@ function App() {
             {textcontainer_var.export_text(LangageInt,TextIndex,0)}
           </Link>
           <Link to="/Game" className ="navbar-button">
-            {textcontainer_var.export_text(LangageInt,TextIndex,1)+'i'}
+            {textcontainer_var.export_text(LangageInt,TextIndex,1)}
           </Link>
-          <button onClick={change_Langage} className='language-button'>​</button>
+          <button onClick={change_Langage} className='language-button' style={{
+              backgroundImage: `url('${get_language_string}')`}}>​</button>
         </nav>
         
         
@@ -160,11 +163,12 @@ function App() {
 
 // Composant Accueil (page par défaut)
 const Accueil = () => {
+  const navigate = useNavigate();
   return (
   <div>
   
   <div className='chip-crypt'></div>
-  <div><button className='play-button'>play</button></div>
+  <div><button className='play-button' onClick={() => navigate('/Game')}>play</button></div>
   <div>
   </div>
     </div>

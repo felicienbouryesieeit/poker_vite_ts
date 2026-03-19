@@ -87,8 +87,9 @@ font-style: normal;*/
 }
 
 .language-button{
+  /*
   background-image: url('/flags/FR.png');
-  /*background-color: white;*/
+  background-color: white;*/
  
   padding:10px 20px ;
   background-size: cover;
