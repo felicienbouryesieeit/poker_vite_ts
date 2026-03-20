@@ -1,13 +1,19 @@
 [
-[
-"Home",
-
-"Game"
-
-],
-[
-"$ card*",
-
-"of the same suit"
-]
+  [
+    "Home",
+    "Game",
+    "Play",
+    "Login"
+  ],
+  [
+    "$ card*",
+    "of the same symbol",
+    "Play",
+    "Discard",
+    "End of turn"
+  ],
+  [
+    "Sign up",
+    "Log in"
+  ]
 ]

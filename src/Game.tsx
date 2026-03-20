@@ -9,6 +9,15 @@ import TextContainer from './TextContainer.tsx';
 
 const Game = ({ get_language}: { get_language: () => void}) => {
 
+
+
+  
+const get_language_int = () => {
+    const result : any = get_language();
+    return result
+  }
+  
+
   //sert juste a l'affichage
   const[pokerHand, setpokerHand] = useState<PokerCard[]>([]);
   //la vraie main
@@ -21,18 +30,20 @@ const Game = ({ get_language}: { get_language: () => void}) => {
 
 
   const [description, setDescription] = useState('')
-  const[ActionButtons, setActionButtons] = useState<string[]>(['Play','Discard']);
-  setActionButtons
+  
   const[description_card, setdescription_card] = useState<Cardpar | null>(null);
   
   let Gamemanager_var : GameManager = new GameManager();
   let textcontainer_var : TextContainer = new TextContainer();
-  textcontainer_var
+  const[ActionButtons, setActionButtons] = useState<string[]>([
+    textcontainer_var.export_text(get_language_int(),1,2),
+    textcontainer_var.export_text(get_language_int(),1,3)
+  ]);
+  setActionButtons
   //let description_card : any;
   
   
   
-
 
 
 
@@ -56,10 +67,7 @@ const Spawn_poker_deck = () => {
 }
 
 
-  const get_language_int = () => {
-    const result : any = get_language();
-    return result
-  }
+  
 
 
   
@@ -134,8 +142,6 @@ const ClickCard = (card: Cardpar) => {
   setdescription_card(card);
   }
   
-  //textcontainer_var.export_text(get_language_int(),1,0)
-  //get_language_int()
 }
 
   if (card instanceof SkillCardPar) {
@@ -258,7 +264,6 @@ const ClickActionButton = (index: number) => {
     //card.set_is_selected(true);
     
     let didi = 0
-    didi =get_language_int()
     
      //card.get_card_description()
     setSkillHand(Gamemanager_var.skill_hand)
@@ -330,7 +335,7 @@ const ActionButtonList = () => (
             //style={{backgroundImage: `url('${card.image}')`}}
             onClick={() => ClickEndTurn()}
           >
-            {'end turn'}
+            {textcontainer_var.export_text(get_language_int(),1,4)}
           </button>
           </div>
     </div>

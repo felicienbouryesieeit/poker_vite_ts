@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-do
 import Game from './Game.tsx';
 import Vide2 from './Vide2.tsx';
 import Vide3 from './Vide3.tsx';
+import Connexionroute from './Connexionroute.tsx';
 import { supabase } from './createClient.ts';
 import TextContainer from './TextContainer.tsx';
 
@@ -13,24 +14,6 @@ interface User {
 }
 function App() {
   let textcontainer_var : TextContainer = new TextContainer();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const [users, setUsers] = useState<User[]>([])
   const [user, setUser] = useState<User>({
     
@@ -79,35 +62,10 @@ function App() {
       
   }
 
-  /*
-  function handlechange(event: React.ChangeEvent<HTMLInputElement>) {
-    setUser(prevFormData=>{return{...prevFormData,
-      [event.target.name]: event.target.value
-    }})}*/
-
-
     const test = () => {
       //console.log("users doudou : ",users);
       return users
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const get_language = () =>{
     return LangageInt;
   }
@@ -126,8 +84,14 @@ function App() {
   
 //<Vide3 onClickFunc={testclick}></Vide3>
   const get_language_string = () => {
-    return "/flags/EN.png"
+    let language_emoji = ""
+    switch (LangageInt) {
+      case 0 : language_emoji = "🇬🇧"; break;
+      case 1 : language_emoji = "🇫🇷"; break;
+    }
+    return language_emoji;
   }
+  // className='language-button'
   return (
     <BrowserRouter>
       <header>
@@ -139,17 +103,22 @@ function App() {
           <Link to="/Game" className ="navbar-button">
             {textcontainer_var.export_text(LangageInt,TextIndex,1)}
           </Link>
-          <button onClick={change_Langage} className='language-button' style={{
-              backgroundImage: `url('${get_language_string}')`}}>​</button>
+          <Link to="/Connexionroute/*" className ="navbar-button">
+            {textcontainer_var.export_text(LangageInt,TextIndex,3)}
+          </Link>
+          
+          <button onClick={change_Langage} className='language-button'>{get_language_string()}​</button>
         </nav>
         
         
         <Routes>
-          <Route path="/" element={<Accueil />} />
+          <Route path="/" element={<Accueil get_language={get_language}/>} />
           <Route path="/Game" element={<Game 
           get_language={get_language}
           />} />
-          <Route path="/Vide2" element={<Vide2 />} />
+          <Route path="/Connexionroute/*" element={<Connexionroute
+          get_language={get_language}
+          />} />
           <Route path="/Vide3" element={<Vide3 
           onClickFunc={testclick}
           onClickFunc2={testclick2}/>} />
@@ -162,13 +131,20 @@ function App() {
 }
 
 // Composant Accueil (page par défaut)
-const Accueil = () => {
+const Accueil = ({ get_language}: { get_language: () => void}) => {
+  
+  let textcontainer_var : TextContainer = new TextContainer();
+  const get_language_int = () => {
+    const result : any = get_language();
+    return result
+  }
+
   const navigate = useNavigate();
   return (
   <div>
   
   <div className='chip-crypt'></div>
-  <div><button className='play-button' onClick={() => navigate('/Game')}>play</button></div>
+  <div><button className='play-button' onClick={() => navigate('/Game')}>{textcontainer_var.export_text(get_language_int(),0,2)}</button></div>
   <div>
   </div>
     </div>

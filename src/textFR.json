@@ -1,10 +1,19 @@
 [
   [
     "Accueil",
-    "Jeu"
+    "Jeu",
+    "Jouer",
+    "Connexion"
   ],
   [
     "$ carte*",
-    "de même symbole"
+    "de même symbole",
+    "Jouer",
+    "Defausser",
+    "Fin du tour"
+  ],
+  [
+    "S'inscrire",
+    "Se connecter"
   ]
 ]
