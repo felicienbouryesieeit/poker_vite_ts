@@ -4,13 +4,15 @@ import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-do
 import Game from './Game.tsx';
 import Vide2 from './Vide2.tsx';
 import Vide3 from './Vide3.tsx';
-import Connexionroute from './Connexionroute.tsx';
+import Connexion from './Connexion.tsx';
 import { supabase } from './createClient.ts';
 import TextContainer from './TextContainer.tsx';
+import ContactUs from './ContactUs.tsx';
 
 interface User {
   name: string;
     id: number;
+    created_at : string;
 }
 function App() {
   let textcontainer_var : TextContainer = new TextContainer();
@@ -18,19 +20,56 @@ function App() {
   const [user, setUser] = useState<User>({
     
     name: '',
-    id: 0
+    id: 0,
+    created_at:''
   })
   setUser
   const [LangageInt,setLangageInt] = useState(0);
   const [TextIndex,setTextIndex] = useState(0);
-  setTextIndex
-  const change_Langage = () => {
-    setLangageInt(LangageInt+1);
+  const [isstarting,setIsstarting] = useState(true);
+  
 
-    if (LangageInt==1) {
-      setLangageInt(0)
+  setTextIndex
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  const change_Langage = () => {
+    let local_int = LangageInt;
+    
+    local_int+=1;
+
+    if (local_int==2) {
+      local_int=0
+    }
+    setLangageInt2(local_int);
+  }
+
+  const setLangageInt2 = (local_int:number) => {
+    
+    setLangageInt(local_int);
+    localStorage.setItem("language",local_int.toString());
+  }
+
+
+
+  
+  const begin = () => {
+    if (isstarting) {
+      setIsstarting(false);
+      setLangageInt2(Number(localStorage.getItem('language')||'0'))
     }
   }
+  begin()
 
   //console.log(user)
 
@@ -39,8 +78,13 @@ function App() {
     fetchUsers()
   }, [])
 
+  function handlechange(event: React.ChangeEvent<HTMLInputElement>) {
+    console.log("goy",event.target.value)
+    setUser(prevFormData=>{return{...prevFormData,
+      [event.target.name]: event.target.value
+    }})}
 
-
+  
   async function fetchUsers(): Promise<void> {
     const { data} = await supabase
       .from('users')
@@ -50,16 +94,28 @@ function App() {
     
   }
 
-  let g=0
-  if (g==1) {
-    createUser()
-  }
   async function createUser(): Promise<void> {
 
-    await supabase
+    //event: React.FormEvent<HTMLFormElement>
+    //event.preventDefault();
+
+    try {
+    const { data, error } = await supabase
       .from('users')
-      .insert({ name: user.name })
-      
+      .insert({ name: 'fonction' })/*user.name*/
+      .select();
+    
+    if (error) {
+      console.error(error);
+      return;
+    }
+    
+    console.log(data);
+    await fetchUsers();
+  } catch (error) {
+    console.error(error);
+  }
+  
   }
 
     const test = () => {
@@ -100,10 +156,13 @@ function App() {
           <Link to="/" className ="navbar-button">
             {textcontainer_var.export_text(LangageInt,TextIndex,0)}
           </Link>
-          <Link to="/Game" className ="navbar-button">
+          <Link to="/poker_vite_ts/Game" className ="navbar-button">
             {textcontainer_var.export_text(LangageInt,TextIndex,1)}
           </Link>
-          <Link to="/Connexionroute/*" className ="navbar-button">
+          <Link to="/poker_vite_ts/ContactUs" className ="navbar-button">
+            {'contact'}
+          </Link>
+          <Link to="/poker_vite_ts/Connexion" className ="navbar-button">
             {textcontainer_var.export_text(LangageInt,TextIndex,3)}
           </Link>
           
@@ -113,18 +172,29 @@ function App() {
         
         <Routes>
           <Route path="/" element={<Accueil get_language={get_language}/>} />
-          <Route path="/Game" element={<Game 
+          <Route path="/poker_vite_ts/Game" element={<Game 
           get_language={get_language}
           />} />
-          <Route path="/Connexionroute/*" element={<Connexionroute
-          get_language={get_language}
+
+          <Route path="/poker_vite_ts/ContactUs" element={<ContactUs
+          
+          />} />
+
+          <Route path="/poker_vite_ts/Connexion" element={<Connexion
+          get_language={get_language} createUser={createUser} handlechange={handlechange}
           />} />
           <Route path="/Vide3" element={<Vide3 
           onClickFunc={testclick}
           onClickFunc2={testclick2}/>} />
           
         </Routes>
+
+
       </header>
+
+
+      
+
     </BrowserRouter>
     
   );
