@@ -22,7 +22,7 @@ const Connexion = ({ get_language, createUser, handlechange}: { get_language: ()
   
   
   
-  
+  handlechange
   
   const begin = () => {
     if (isstarting) {
@@ -152,14 +152,6 @@ const restartbutton = () => {
   }
 
 
-  const handle_change = () => {
-    //handlechange
-  }
-
-
-  const create_user = () => {
-    //createUser()
-  }
 
 
   

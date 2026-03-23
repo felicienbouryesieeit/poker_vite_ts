@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react' //React,
 import './App.css'
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import Game from './Game.tsx';
-import Vide2 from './Vide2.tsx';
+//import Vide2 from './Vide2.tsx';
 import Vide3 from './Vide3.tsx';
 import Connexion from './Connexion.tsx';
 import { supabase } from './createClient.ts';
@@ -23,6 +23,7 @@ function App() {
     id: 0,
     created_at:''
   })
+  user
   setUser
   const [LangageInt,setLangageInt] = useState(0);
   const [TextIndex,setTextIndex] = useState(0);
