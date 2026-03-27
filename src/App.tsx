@@ -66,6 +66,8 @@ function App() {
     return isconnectedvar;
   }
 
+  isconnected
+
 
   
   
@@ -135,6 +137,7 @@ async function createUser(local_name : string,local_email : string,local_passwor
     try {
     const { data, error } = await supabase.auth.signUp(
   {
+    
     email: local_email,
     password: local_password,
     options: {
@@ -144,6 +147,7 @@ async function createUser(local_name : string,local_email : string,local_passwor
     }
   }
 )
+  data
     if (error) {
       alert(error)
       console.error(error);
@@ -250,6 +254,7 @@ async function connectUser(local_email : string,local_password : string): Promis
   }
   
   }
+  createUser2
 
     const test = () => {
       //console.log("users doudou : ",users);
