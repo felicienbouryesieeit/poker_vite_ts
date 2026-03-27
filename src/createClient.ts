@@ -1,10 +1,13 @@
 import { createClient } from "@supabase/supabase-js";
 
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+export const supabase = createClient("https://rrzzlmclbtsogbixeged.supabase.co", "sb_publishable_frdZgESMUhO4sjmWApmgDg_BbQ1D1mu");
+/*
 export const supabase = createClient(
     "https://rrzzlmclbtsogbixeged.supabase.co", 
     "sb_publishable_frdZgESMUhO4sjmWApmgDg_BbQ1D1mu");
-
+*/
 
     
-      //project url : https://ivtdgksrvivanvsrvrbb.supabase.co
-      //api key : sb_publishable_xro9Mo0o3ouy_SBhMRl9YA_iHjsEQGS

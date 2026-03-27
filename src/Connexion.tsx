@@ -2,11 +2,11 @@
 
 
 import React, { useState,useRef } from 'react';
-import TextContainer from './TextContainer.tsx';
-import emailjs from '@emailjs/browser';
+import TextContainer from './TextContainer.tsx'; /* connectUser */
+//import emailjs from '@emailjs/browser';
 
 
-const Connexion = ({ get_language, createUser, handlechange}: { get_language: () => void,createUser: () => void, handlechange : (event: React.ChangeEvent<HTMLInputElement>) => void}) => {
+const Connexion = ({ get_language, connectUser, createUser, handlechange}: { get_language: () => void,connectUser :(local_email : string,local_password : string) => void,createUser: (local_name : string,local_email : string,local_password : string) => void, handlechange : (event: React.ChangeEvent<HTMLInputElement>) => void}) => {
     
   
   
@@ -42,10 +42,11 @@ const Connexion = ({ get_language, createUser, handlechange}: { get_language: ()
 
 
 
-  const formemail : any = useRef('');
+  const formcreateuser : any = useRef('');
+  const formconnectuser : any = useRef('');
   const formCheckCode : any = useRef('');
   
-  
+  /*
   const sendEmail = (e:any) => {
     
     setConnexionType(3);
@@ -89,7 +90,7 @@ const Connexion = ({ get_language, createUser, handlechange}: { get_language: ()
         },
       );
   };
-
+*/
 
 
 
@@ -115,7 +116,7 @@ const restartbutton = () => {
     
     if (local_code==code.toString()) {
       setConnexionType(4);
-      createUser();
+      //createUser('');
     } else {
       setConnexionType(5);
     }
@@ -151,9 +152,28 @@ const restartbutton = () => {
     return result
   }
 
+  const connect_user  = (e:any) => {
+    e.preventDefault();
+    const formCheckCodedata = new FormData(formconnectuser.current);
+      const local_email = String(formCheckCodedata.get('email')); 
+      const local_password = String(formCheckCodedata.get('password')); 
+      console.log("naha",local_email,local_password);
+      connectUser(local_email,local_password);
+      
+
+  }
 
 
+  const create_user = (e:any) => {
+    e.preventDefault();
+    const formCheckCodedata = new FormData(formcreateuser.current);
+      const local_title = String(formCheckCodedata.get('title')); 
+      const local_email = String(formCheckCodedata.get('email')); 
+      const local_password = String(formCheckCodedata.get('password')); 
+      createUser(local_title,local_email,local_password);
+      
 
+  }
   
 
   
@@ -204,13 +224,13 @@ const restartbutton = () => {
         {ConnexionType==2 && (
           <div>
 
-          <form ref={formemail} onSubmit={sendEmail}>
+          <form ref={formcreateuser} onSubmit={create_user}>
           <label>Name</label>
           <input type="text" name="title" />
           <label>Email</label>
           <input type="email" name="email" />
           <label>Mot de passe</label>
-          <input type="text" name="mot de passe" />
+          <input type="text" name="password" />
           <input type="submit" value="Send" />
           </form>
 
@@ -222,9 +242,9 @@ const restartbutton = () => {
       {ConnexionType==1 && (
           <div>
 
-            <form onSubmit={test}>
-        <input type="email" placeholder="Email" />
-        <input type="mot de passe" placeholder="mot de passe" />
+        <form ref={formconnectuser} onSubmit={connect_user}>
+        <input type="email" placeholder="Email"  name="email"/>
+        <input type="mot de passe" placeholder="mot de passe" name="password" />
         <button type='submit'>{textcontainer_var.export_text(get_language_int(),2,1)}</button>
         </form>
 

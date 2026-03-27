@@ -16,6 +16,7 @@ interface User {
 }
 function App() {
   let textcontainer_var : TextContainer = new TextContainer();
+  const [token,setToken] = useState('');
   const [users, setUsers] = useState<User[]>([])
   const [user, setUser] = useState<User>({
     
@@ -32,15 +33,41 @@ function App() {
 
   setTextIndex
 
+  useEffect(()=>{
+    const token2 = sessionStorage.getItem('token')
+    if (token2) {
+      //let data2 = 
+      setToken(token2);
+      console.log("bandito");
+      console.log(JSON.parse(token2));
+      //let data : any = JSON.parse(token2)
+
+      
+    }
+  },[])
+
+  const getusername = () => {
+    let username :string = textcontainer_var.export_text(LangageInt,TextIndex,3);
+    if (token) {
+      username = JSON.parse(token).user.user_metadata.first_name;
+    }
+    return username;
+  }
 
 
 
 
 
+  const isconnected = () => {
+    let isconnectedvar : boolean = false;
+    if (token) {
+      isconnectedvar = true;
+    }
+    return isconnectedvar;
+  }
 
 
-
-
+  
   
 
 
@@ -80,7 +107,6 @@ function App() {
   }, [])
 
   function handlechange(event: React.ChangeEvent<HTMLInputElement>) {
-    console.log("goy",event.target.value)
     setUser(prevFormData=>{return{...prevFormData,
       [event.target.name]: event.target.value
     }})}
@@ -95,11 +121,117 @@ function App() {
     
   }
 
-  async function createUser(): Promise<void> {
+
+
+
+
+
+
+
+
+
+async function createUser(local_name : string,local_email : string,local_password : string): Promise<void> {
+  
+    try {
+    const { data, error } = await supabase.auth.signUp(
+  {
+    email: local_email,
+    password: local_password,
+    options: {
+      data: {
+        first_name: local_name,
+      }
+    }
+  }
+)
+    if (error) {
+      alert(error)
+      console.error(error);
+      return;
+    }
+    
+    alert("success")
+    //console.log(data);
+    //await fetchUsers();
+  } catch (error) {
+    console.error(error);
+  }
+
+
+
+  
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+async function connectUser(local_email : string,local_password : string): Promise<void> {
+      console.log("naha bis",local_email,local_password);
+    try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+  email: local_email,
+  password: local_password,
+})
+
+    if (error) {
+      alert(error)
+      console.error(error);
+      return;
+    }
+    
+    alert("success")
+    sessionStorage.setItem('token',JSON.stringify(data));
+    location.reload();
+
+    //await fetchUsers();
+  } catch (error) {
+    console.error(error);
+  }
+
+
+
+  
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  async function createUser2(): Promise<void> {
 
     //event: React.FormEvent<HTMLFormElement>
     //event.preventDefault();
-
+    
     try {
     const { data, error } = await supabase
       .from('users')
@@ -164,7 +296,7 @@ function App() {
             {'contact'}
           </Link>
           <Link to="/poker_vite_ts/Connexion" className ="navbar-button">
-            {textcontainer_var.export_text(LangageInt,TextIndex,3)}
+            {getusername()}
           </Link>
           
           <button onClick={change_Langage} className='language-button'>{get_language_string()}​</button>
@@ -182,7 +314,7 @@ function App() {
           />} />
 
           <Route path="/poker_vite_ts/Connexion" element={<Connexion
-          get_language={get_language} createUser={createUser} handlechange={handlechange}
+          get_language={get_language} connectUser={connectUser} createUser={createUser} handlechange={handlechange}
           />} />
           <Route path="/Vide3" element={<Vide3 
           onClickFunc={testclick}
@@ -215,7 +347,7 @@ const Accueil = ({ get_language}: { get_language: () => void}) => {
   <div>
   
   <div className='chip-crypt'></div>
-  <div><button className='play-button' onClick={() => navigate('/Game')}>{textcontainer_var.export_text(get_language_int(),0,2)}</button></div>
+  <div><button className='play-button' onClick={() => navigate('/poker_vite_ts/Game')}>{textcontainer_var.export_text(get_language_int(),0,2)}</button></div>
   <div>
   </div>
     </div>
