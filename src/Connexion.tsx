@@ -144,9 +144,6 @@ const restartbutton = () => {
     let textcontainer_var : TextContainer = new TextContainer();
 
 
-    const test = () => {
-
-    }
     const get_language_int = () => {
     const result : any = get_language();
     return result
