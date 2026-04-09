@@ -165,11 +165,12 @@ function App() {
 async function resetpassword() {
   
 // Récupère automatiquement l'URL de base
-  const baseUrl = import.meta.env.PROD 
+/*  
+const baseUrl = import.meta.env.PROD 
     ? `https://${window.location.hostname}`  // Utilise le domaine actuel
     : 'http://localhost:5173';
-  
-  const redirectUrl = `${baseUrl}/poker_vite_ts/resetpassword`;
+  */
+  //const redirectUrl = `${baseUrl}/poker_vite_ts/resetpassword`;
   
   const { data, error } = await supabase.auth.resetPasswordForEmail('felicienboury@gmail.com', {
     redirectTo: 'https://poker-vite-ts.vercel.app/poker_vite_ts/resetpassword'
