@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react' //React,
 import { supabase } from './createClient.ts';
 
 const Resetpassword = () => {
+  useState
    useEffect(() => {
    supabase.auth.onAuthStateChange(async (event, session) => {
+    session
      if (event == "PASSWORD_RECOVERY") {
        const newPassword : any = prompt("What would you like your new password to be?");
        const { data, error } = await supabase.auth

@@ -12,7 +12,6 @@ const Connexion = ({ get_language, connectUser, createUser, handlechange, get_to
   
   
   const [isstarting,setIsstarting] = useState(true);
-  const [code,setCode] = useState(0);
   
   
   /*event: React.FormEvent<HTMLFormElement> */
@@ -27,8 +26,6 @@ const Connexion = ({ get_language, connectUser, createUser, handlechange, get_to
   const begin = () => {
     if (isstarting) {
       setIsstarting(false);
-      let random_code : number = Math.floor(Math.random() * 999999)+1000000;
-      setCode(random_code);
       
     }
   }
@@ -45,7 +42,6 @@ const Connexion = ({ get_language, connectUser, createUser, handlechange, get_to
 
   const formcreateuser : any = useRef('');
   const formconnectuser : any = useRef('');
-  const formCheckCode : any = useRef('');
   
   /*
   const sendEmail = (e:any) => {
@@ -101,30 +97,6 @@ const Connexion = ({ get_language, connectUser, createUser, handlechange, get_to
 
 
 
-
-
-const restartbutton = () => {
-  location.reload();
-  
-}
-
-
-  
-  const checkCode = (e:any) => {
-    e.preventDefault();
-    const formCheckCodedata = new FormData(formCheckCode.current);
-    const local_code = formCheckCodedata.get('validation_code');
-    
-    if (local_code==code.toString()) {
-      setConnexionType(4);
-      //createUser('');
-    } else {
-      setConnexionType(5);
-    }
-    
-
-  }
-  
   
   
   
