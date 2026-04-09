@@ -172,7 +172,7 @@ async function resetpassword() {
   const redirectUrl = `${baseUrl}/poker_vite_ts/resetpassword`;
   
   const { data, error } = await supabase.auth.resetPasswordForEmail('felicienboury@gmail.com', {
-    redirectTo: redirectUrl
+    redirectTo: 'https://poker-vite-ts.vercel.app/poker_vite_ts/resetpassword'
   });
   if (data) {
     alert("check your email");
