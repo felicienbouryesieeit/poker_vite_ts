@@ -2,22 +2,32 @@ import { useEffect, useState } from 'react' //React,
 import './App.css'
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import Game from './Game.tsx';
-//import Vide2 from './Vide2.tsx';
 import Vide3 from './Vide3.tsx';
 import Connexion from './Connexion.tsx';
 import { supabase } from './createClient.ts';
 import TextContainer from './TextContainer.tsx';
-import ContactUs from './ContactUs.tsx';
+import Resetpassword from './resetpassword.tsx';
+//import ContactUs from './ContactUs.tsx';
+import Comments from './Comments.tsx';
 
 interface User {
   name: string;
     id: number;
     created_at : string;
 }
+
+interface Comment {
+  comment: string;
+    id: number;
+    created_at : string;
+    name : string;
+}
+
 function App() {
   let textcontainer_var : TextContainer = new TextContainer();
   const [token,setToken] = useState('');
   const [users, setUsers] = useState<User[]>([])
+  const [comments, setComments] = useState<Comment[]>([])
   const [user, setUser] = useState<User>({
     
     name: '',
@@ -26,6 +36,7 @@ function App() {
   })
   user
   setUser
+  setUsers
   const [LangageInt,setLangageInt] = useState(0);
   const [TextIndex,setTextIndex] = useState(0);
   const [isstarting,setIsstarting] = useState(true);
@@ -48,14 +59,22 @@ function App() {
 
   const getusername = () => {
     let username :string = textcontainer_var.export_text(LangageInt,TextIndex,3);
-    if (token) {
-      username = JSON.parse(token).user.user_metadata.first_name;
+    if (get_token()) {
+      username = getusername2();
+      //console.log("username : ", username);
     }
     return username;
   }
 
+  const getusername2 = () => {
+    let username :string = JSON.parse(token).user.user_metadata.first_name;
+    return username;
+  }
 
-
+  const get_token = () => {
+    
+    return token;
+  }
 
 
   const isconnected = () => {
@@ -91,7 +110,9 @@ function App() {
   }
 
 
-
+  const getcomments = () => {
+    return comments;
+  }
   
   const begin = () => {
     if (isstarting) {
@@ -103,9 +124,14 @@ function App() {
 
   //console.log(user)
 
-
+/*
   useEffect(() => {
     fetchUsers()
+  }, [])*/
+
+
+  useEffect(() => {
+    fetchcomments()
   }, [])
 
   function handlechange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -113,7 +139,7 @@ function App() {
       [event.target.name]: event.target.value
     }})}
 
-  
+  /*
   async function fetchUsers(): Promise<void> {
     const { data} = await supabase
       .from('users')
@@ -121,12 +147,46 @@ function App() {
 
     setUsers(data as User[] || []);
     
+  }*/
+
+
+
+  async function fetchcomments(): Promise<void> {
+    
+    const {data} = await supabase
+      .from('comments')
+      .select('*');
+
+    setComments(data as Comment[] || []);
+    
   }
 
 
+async function resetpassword() {
+  
+const { data, error } = await supabase.auth.resetPasswordForEmail('felicienboury@gmail.com', {
+  redirectTo: 'https://poker-vite-ts.vercel.app/poker_vite_ts/resetpassword'
+})
+console.log("oui"+data);
+console.log("non"+error);
+}
 
+async function logout() {
+  try {
+  const { error } = await supabase.auth.signOut()
+  sessionStorage.removeItem('token');
+  location.reload();
+  if (error) {
+      alert(error)
+      console.error(error);
+      return;
+    }
 
-
+  }
+  catch (error) {
+    console.error(error);
+  }
+}
 
 
 
@@ -181,7 +241,7 @@ async function createUser(local_name : string,local_email : string,local_passwor
 
 
 async function connectUser(local_email : string,local_password : string): Promise<void> {
-      console.log("naha bis",local_email,local_password);
+      
     try {
     const { data, error } = await supabase.auth.signInWithPassword({
   email: local_email,
@@ -195,6 +255,7 @@ async function connectUser(local_email : string,local_password : string): Promis
     }
     
     alert("success")
+    console.log(data);
     sessionStorage.setItem('token',JSON.stringify(data));
     location.reload();
 
@@ -231,15 +292,18 @@ async function connectUser(local_email : string,local_password : string): Promis
 
 
 
-  async function createUser2(): Promise<void> {
+  async function createcomment(local_comment : string): Promise<void> {
 
     //event: React.FormEvent<HTMLFormElement>
-    //event.preventDefault();
+    
     
     try {
     const { data, error } = await supabase
-      .from('users')
-      .insert({ name: 'fonction' })/*user.name*/
+      .from('comments')
+      .insert({ 
+        comment: local_comment 
+        ,name: JSON.parse(token).user.user_metadata.first_name
+      })/*user.name*/
       .select();
     
     if (error) {
@@ -248,13 +312,13 @@ async function connectUser(local_email : string,local_password : string): Promis
     }
     
     console.log(data);
-    await fetchUsers();
+    await fetchcomments();
   } catch (error) {
     console.error(error);
   }
   
   }
-  createUser2
+  createcomment
 
     const test = () => {
       //console.log("users doudou : ",users);
@@ -298,7 +362,7 @@ async function connectUser(local_email : string,local_password : string): Promis
             {textcontainer_var.export_text(LangageInt,TextIndex,1)}
           </Link>
           <Link to="/poker_vite_ts/ContactUs" className ="navbar-button">
-            {'contact'}
+            {'Comments'}
           </Link>
           <Link to="/poker_vite_ts/Connexion" className ="navbar-button">
             {getusername()}
@@ -314,24 +378,22 @@ async function connectUser(local_email : string,local_password : string): Promis
           get_language={get_language}
           />} />
 
-          <Route path="/poker_vite_ts/ContactUs" element={<ContactUs
-          
+          <Route path="/poker_vite_ts/ContactUs" element={<Comments createcomment={createcomment} getcomments={getcomments} get_token={get_token}
           />} />
 
           <Route path="/poker_vite_ts/Connexion" element={<Connexion
-          get_language={get_language} connectUser={connectUser} createUser={createUser} handlechange={handlechange}
+          get_language={get_language} connectUser={connectUser} createUser={createUser} handlechange={handlechange} get_token={get_token} logout={logout} resetpassword={resetpassword}
           />} />
           <Route path="/Vide3" element={<Vide3 
           onClickFunc={testclick}
           onClickFunc2={testclick2}/>} />
+          <Route path="/poker_vite_ts/resetpassword" element={<Resetpassword/>} />
           
         </Routes>
 
 
       </header>
 
-
-      
 
     </BrowserRouter>
     
@@ -353,6 +415,9 @@ const Accueil = ({ get_language}: { get_language: () => void}) => {
   
   <div className='chip-crypt'></div>
   <div><button className='play-button' onClick={() => navigate('/poker_vite_ts/Game')}>{textcontainer_var.export_text(get_language_int(),0,2)}</button></div>
+  
+  
+    
   <div>
   </div>
     </div>

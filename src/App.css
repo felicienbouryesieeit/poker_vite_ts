@@ -13,6 +13,12 @@
   will-change: filter;
   transition: filter 300ms;
 }
+/*
+input, textarea {
+    background-color: #33333300;
+    color: white;
+}*/
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }

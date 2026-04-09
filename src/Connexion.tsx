@@ -6,7 +6,7 @@ import TextContainer from './TextContainer.tsx'; /* connectUser */
 //import emailjs from '@emailjs/browser';
 
 
-const Connexion = ({ get_language, connectUser, createUser, handlechange}: { get_language: () => void,connectUser :(local_email : string,local_password : string) => void,createUser: (local_name : string,local_email : string,local_password : string) => void, handlechange : (event: React.ChangeEvent<HTMLInputElement>) => void}) => {
+const Connexion = ({ get_language, connectUser, createUser, handlechange, get_token,logout,resetpassword}: { get_language: () => void,connectUser :(local_email : string,local_password : string) => void,createUser: (local_name : string,local_email : string,local_password : string) => void, handlechange : (event: React.ChangeEvent<HTMLInputElement>) => void,get_token: () => string,logout: () => void,resetpassword:()=>void}) => {
     
   
   
@@ -29,6 +29,7 @@ const Connexion = ({ get_language, connectUser, createUser, handlechange}: { get
       setIsstarting(false);
       let random_code : number = Math.floor(Math.random() * 999999)+1000000;
       setCode(random_code);
+      
     }
   }
   begin()
@@ -129,13 +130,31 @@ const restartbutton = () => {
   
   
   
+  const isconnected = () => {
+    const token2 = get_token();
+    let isconnectedbool : boolean = false;
+    if (token2) {
+      
+      isconnectedbool = true;
+    }
+    return isconnectedbool;
+  }
+  
+  const get_connexion_type = () => {
+    
+    let connexion_type : number = ConnexionType;
+    if (isconnected()) {
+      connexion_type = 3;
+    }
+    return connexion_type;
+  }
   
   
   
-  
-  
-  
-  
+  const handlechange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+      //handlechange(event);
+      console.log(event.target.value);
+  }
   
   
   const [ConnexionType, setConnexionType] = useState(0);
@@ -160,7 +179,7 @@ const restartbutton = () => {
 
   }
 
-
+  
   const create_user = (e:any) => {
     e.preventDefault();
     const formCheckCodedata = new FormData(formcreateuser.current);
@@ -171,28 +190,27 @@ const restartbutton = () => {
       
 
   }
+
+  const goback = () => {
+    setConnexionType(0);
+  }
   
 
   
   return (
     <div>
       
-      {ConnexionType==5 && (
+      
+
+      {get_connexion_type()==3 && (
         <div>
-          <div>Code incorrect, veuillez recommencer l'inscription.</div>
-          <div><button onClick={restartbutton} >recommencer​</button></div>
-          
-          
-        </div>
+      <button onClick={() => logout()}>
+        {'log out'}
+      </button>
+      </div>
       )}
 
-      {ConnexionType==4 && (
-        <div>
-          Inscription comfirmée
-          
-        </div>
-      )}
-      {ConnexionType==0 && (
+      {get_connexion_type()==0 && (
         <div>
       <button onClick={() => setConnexionType(1)}>
         {textcontainer_var.export_text(get_language_int(),2,1)}
@@ -203,32 +221,17 @@ const restartbutton = () => {
       </div>
       )}
 
-        {ConnexionType==3 && (
-          <div>
-
-          <form ref={formCheckCode} onSubmit={checkCode}>
-          <label>code de validation : </label>
-
-          <input type="text" name="validation_code" />
-          <input type="submit" value="Send" />
-          </form>
+        
 
 
-          </div>
-      )}
-
-
-        {ConnexionType==2 && (
+        {get_connexion_type()==2 && (
           <div>
 
           <form ref={formcreateuser} onSubmit={create_user}>
-          <label>Name</label>
-          <input type="text" name="title" />
-          <label>Email</label>
-          <input type="email" name="email" />
-          <label>Mot de passe</label>
-          <input type="text" name="password" />
-          <input type="submit" value="Send" />
+          <input type="text" name="title" placeholder={textcontainer_var.export_text(get_language_int(),2,3)}/>
+          <input type="email" name="email" placeholder={textcontainer_var.export_text(get_language_int(),2,4)}/>
+          <input type="text" name="password" placeholder={textcontainer_var.export_text(get_language_int(),2,5)} />
+          <input type="submit" value={textcontainer_var.export_text(get_language_int(),2,0)} />
           </form>
 
 
@@ -236,17 +239,22 @@ const restartbutton = () => {
       )}
 
 
-      {ConnexionType==1 && (
+      {get_connexion_type()==1 && (
           <div>
 
         <form ref={formconnectuser} onSubmit={connect_user}>
-        <input type="email" placeholder="Email"  name="email"/>
-        <input type="mot de passe" placeholder="mot de passe" name="password" />
+        <input type="email" placeholder={textcontainer_var.export_text(get_language_int(),2,4)}  name="email"  onChange={handlechange2}/>
+        <input type="mot de passe" placeholder={textcontainer_var.export_text(get_language_int(),2,5)} name="password" />
         <button type='submit'>{textcontainer_var.export_text(get_language_int(),2,1)}</button>
         </form>
+      <button onClick={() => resetpassword()}>
+        {textcontainer_var.export_text(get_language_int(),2,2)}
+      </button>
 
           </div>
       )}
+      {(get_connexion_type()==1 || get_connexion_type()==2) && (
+      <button onClick={() => goback()}>{textcontainer_var.export_text(get_language_int(),2,6)}</button>)}
         
         </div>
   );

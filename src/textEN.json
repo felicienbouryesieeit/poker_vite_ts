@@ -13,7 +13,12 @@
     "End of turn"
   ],
   [
-    "Sign up",
-    "Log in"
-  ]
+    "Register",
+    "Log in",
+    "Forgot password?",
+    "Last name",
+    "Email",
+    "Password",
+    "Go back"
+]
 ]

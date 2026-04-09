@@ -6,6 +6,7 @@ import Cardpar from './cards/Cardpar';
 import GameManager from './GameManager';
 import SkillReturn from './cards/SkillReturn';
 import TextContainer from './TextContainer.tsx';
+//import Comments from './Comments.tsx';
 
 const Game = ({ get_language}: { get_language: () => void}) => {
 
