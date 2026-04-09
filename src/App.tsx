@@ -36,7 +36,6 @@ function App() {
   })
   user
   setUser
-  setUsers
   const [LangageInt,setLangageInt] = useState(0);
   const [TextIndex,setTextIndex] = useState(0);
   const [isstarting,setIsstarting] = useState(true);
@@ -164,11 +163,24 @@ function App() {
 
 async function resetpassword() {
   
-const { data, error } = await supabase.auth.resetPasswordForEmail('felicienboury@gmail.com', {
-  redirectTo: 'https://poker-vite-ts.vercel.app/poker_vite_ts/resetpassword'
-})
-console.log("oui"+data);
-console.log("non"+error);
+// Récupère automatiquement l'URL de base
+  const baseUrl = import.meta.env.PROD 
+    ? `https://${window.location.hostname}`  // Utilise le domaine actuel
+    : 'http://localhost:5173';
+  
+  const redirectUrl = `${baseUrl}/poker_vite_ts/resetpassword`;
+  
+  const { data, error } = await supabase.auth.resetPasswordForEmail('felicienboury@gmail.com', {
+    redirectTo: redirectUrl
+  });
+  if (data) {
+    alert("check your email");
+  }
+
+  if (error) {
+    alert(error);
+    console.error(error);
+  }
 }
 
 async function logout() {
@@ -302,7 +314,7 @@ async function connectUser(local_email : string,local_password : string): Promis
       .from('comments')
       .insert({ 
         comment: local_comment 
-        ,name: JSON.parse(token).user.user_metadata.first_name
+      ,name: JSON.parse(token).user.user_metadata.first_name
       })/*user.name*/
       .select();
     
