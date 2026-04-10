@@ -35,10 +35,10 @@ const get_language_int = () => {
   const[description_card, setdescription_card] = useState<Cardpar | null>(null);
 
   const [enemy_life, set_enemy_life] = useState(2);
-  //const [enemy_life2, set_enemy_life2] = useState(2);
   const [player_life, set_player_life] = useState(10);
   const [mult, set_mult] = useState(0);
   const [damage, set_damage] = useState(0);
+  const [gold, set_gold] = useState(0);
   const [score_anim,set_score_anim] = useState(0);
   
   let Gamemanager_var : GameManager = new GameManager();
@@ -75,7 +75,6 @@ const Spawn_poker_deck = () => {
 }
 
 
-  set_enemy_life
 
 
   
@@ -84,6 +83,7 @@ const Spawn_poker_deck = () => {
     if (isBegin==true) {
     
     setIsBegin(false)
+    set_gold(4);
     set_enemy_life(10);
     Gamemanager_var.create_poker_hand();
     Gamemanager_var.create_skill_hand();
@@ -245,7 +245,6 @@ const ClickActionButton = (index: number) => {
       set_mult(card.mult);
       Gamemanager_var.discard_selected_cards();
       //console.log("damage : ",card.get_damage_value().toString(), "mult : ", card.get_mult().toString())
-      //set_enemy_life2(enemy_life);
       
       set_score_anim(0);
       disable_description()
@@ -262,6 +261,10 @@ const ClickActionButton = (index: number) => {
         setTimeout(() => {
           //console.log('Délai écoulé - 2 secondes');
           set_enemy_life(enemy_life - (card.damage_value*card.mult));
+          if (enemy_life<=0) {
+            set_gold(gold+3);
+            
+          }
           set_score_anim(0);
           set_damage(0);
           set_mult(0);
@@ -403,6 +406,10 @@ set_enemy_life
             {textcontainer_var.export_text(get_language_int(),1,4)}
           </button>
           </div>
+
+    </div>
+    <div>
+      {'gold :'+gold.toString()}
     </div>
     
     </div>
