@@ -99,7 +99,7 @@ class SkillCardPar extends Cardpar {
     return SkillReturnvar;
   }
   
-  skilleffect() {
+  skilleffect(selected_cards : PokerCard[]) {
     
   }
 

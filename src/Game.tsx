@@ -236,7 +236,7 @@ const ClickActionButton = (index: number) => {
     setSkillHand(Gamemanager_var.skill_hand)
     let skillreturn : SkillReturn = card.activateskill(Gamemanager_var.create_selected_cards_list());
     if (skillreturn.isvalid==true) {
-      card.skilleffect();
+      card.skilleffect(Gamemanager_var.create_selected_cards_list());
       Gamemanager_var.discard_selected_cards();
       console.log("damage : ",card.get_damage_value().toString(), "mult : ", card.get_mult().toString())
       disable_description()

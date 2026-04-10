@@ -1,5 +1,5 @@
 import SkillCardPar from '../SkillCardPar';
-
+import PokerCard from "../PokerCard";
 
 class Skill_white_sword extends SkillCardPar {
  
@@ -12,8 +12,10 @@ class Skill_white_sword extends SkillCardPar {
 
 }
 
-skilleffect() {
-    super.skilleffect();
+skilleffect(selected_cards : PokerCard[]) {
+    super.skilleffect(selected_cards);
+    console.log("selected cards :");
+    console.log(selected_cards);
     this.damage_value = 11;
   }
 
