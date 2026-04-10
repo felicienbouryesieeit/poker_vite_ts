@@ -319,7 +319,7 @@ enemy_life
 
   return (
     <div  className="app">
-      <div>en effet oui</div>
+      <div>{'enemy life : '+enemy_life.toString()}</div>
     <CardList cards={pokerHand}/>
     <CardList cards={skillHand}/>
     <div>
