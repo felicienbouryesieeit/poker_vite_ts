@@ -327,7 +327,7 @@ set_score_anim
 const score_animation = () => {
   let local_damage = damage*mult;
   let after = enemy_life - local_damage;
-  set_enemy_life(after);
+  set_enemy_life(enemy_life - 2);
   /*
   set_score_anim(0);
 
