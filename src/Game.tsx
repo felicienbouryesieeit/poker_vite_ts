@@ -34,7 +34,7 @@ const get_language_int = () => {
   
   const[description_card, setdescription_card] = useState<Cardpar | null>(null);
 
-  const [enemy_life, set_enemy_life] = useState(100);
+  const [enemy_life, set_enemy_life] = useState(2);
   const [player_life, set_player_life] = useState(10);
   const [mult, set_mult] = useState(0);
   const [damage, set_damage] = useState(0);
@@ -83,6 +83,7 @@ const Spawn_poker_deck = () => {
     if (isBegin==true) {
     
     setIsBegin(false)
+    //set_enemy_life(100);
     Gamemanager_var.create_poker_hand();
     Gamemanager_var.create_skill_hand();
     
@@ -325,7 +326,7 @@ return score_string;
 
 const score_animation = () => {
   set_score_anim(0);
-  let delay = 200; 
+  let delay = 400; 
     setTimeout(() => {
       console.log('Délai écoulé - 2 secondes');
       set_score_anim(1);
@@ -340,7 +341,7 @@ const score_animation = () => {
 
 enemy_life
 set_player_life
-
+set_enemy_life
   return (
     <div  className="app">
       <div className="top-stats">
