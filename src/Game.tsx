@@ -35,6 +35,7 @@ const get_language_int = () => {
   const[description_card, setdescription_card] = useState<Cardpar | null>(null);
 
   const [enemy_life, set_enemy_life] = useState(2);
+  const [enemy_life2, set_enemy_life2] = useState(2);
   const [player_life, set_player_life] = useState(10);
   const [mult, set_mult] = useState(0);
   const [damage, set_damage] = useState(0);
@@ -244,9 +245,40 @@ const ClickActionButton = (index: number) => {
       set_mult(card.mult);
       Gamemanager_var.discard_selected_cards();
       //console.log("damage : ",card.get_damage_value().toString(), "mult : ", card.get_mult().toString())
+      set_enemy_life2(enemy_life);
       set_enemy_life(enemy_life - (card.damage_value*card.mult));
-      score_animation();
+      set_score_anim(2);
       disable_description()
+
+      
+
+
+
+
+    let delay = 400; 
+    setTimeout(() => {
+      console.log('Délai écoulé - 2 secondes');
+      set_score_anim(1);
+        setTimeout(() => {
+          console.log('Délai écoulé - 2 secondes');
+          set_score_anim(0);
+          //enemy_life - (damage*mult)
+        }, delay);
+    }, delay);
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
     }
     
     setpokerHand2(Gamemanager_var.poker_hand);
@@ -329,25 +361,17 @@ set_score_anim
 const get_damage = () => {
     return damage;
 }*/
-const score_animation = () => {
-  //let local_damage = damage*mult;
-  ///let after = enemy_life - local_damage;
-  
-  /*
-  set_score_anim(0);
 
-  let delay = 400; 
-    setTimeout(() => {
-      console.log('Délai écoulé - 2 secondes');
-      set_score_anim(1);
-        setTimeout(() => {
-          console.log('Délai écoulé - 2 secondes');
-          set_score_anim(0);
-          //enemy_life - (damage*mult)
-        }, delay);
-    }, delay);*/
+const get_enemy_life = () => {
+  let local_life=0;
+  if (score_anim==2) {
+local_life = enemy_life2;
+} else {
+local_life = enemy_life;
+}
 
-  }
+  return enemy_life;
+} 
 
 enemy_life
 set_player_life
@@ -355,7 +379,7 @@ set_enemy_life
   return (
     <div  className="app">
       <div className="top-stats">
-      <div>{'player life : '+player_life.toString()+' || '+'enemy life : '+enemy_life.toString()}</div>
+      <div>{'player life : '+player_life.toString()+' || '+'enemy life : '+get_enemy_life().toString()}</div>
       <div>{get_score_string()}</div>
       </div>
     <CardList cards={pokerHand}/>
