@@ -1,8 +1,8 @@
 import Cardpar from './Cardpar';
 
 class PokerCard extends Cardpar {
-    poker_value: Number;
-    poker_color: Number;
+    poker_value: number;
+    poker_color: number;
   is_selected: boolean;
     
     
@@ -31,7 +31,7 @@ class PokerCard extends Cardpar {
     return this.is_selected;
   }
 
-  begin_pokercard(local_poker_value: Number, local_poker_color: Number) {
+  begin_pokercard(local_poker_value: number, local_poker_color: number) {
     this.poker_value = local_poker_value;
     this.poker_color = local_poker_color;
     let value_string : string = this.poker_value.toString();
@@ -78,7 +78,9 @@ class PokerCard extends Cardpar {
    // console.log("value : ",this.poker_value, "color : ", this.poker_color);
   }
 
-  
+  get_card_value() {
+    return this.poker_value;
+  }
 
 
 

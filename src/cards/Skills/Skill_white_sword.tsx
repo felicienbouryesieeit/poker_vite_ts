@@ -16,7 +16,11 @@ skilleffect(selected_cards : PokerCard[]) {
     super.skilleffect(selected_cards);
     console.log("selected cards :");
     console.log(selected_cards);
-    this.damage_value = 11;
+    let local_damage : number = 0 ;
+    selected_cards.forEach(card => {
+        local_damage = local_damage + card.get_card_value()
+    })
+    this.damage_value = local_damage;
   }
 
 }
