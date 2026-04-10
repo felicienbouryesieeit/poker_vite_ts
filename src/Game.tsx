@@ -242,7 +242,7 @@ const ClickActionButton = (index: number) => {
       set_mult(card.mult);
       Gamemanager_var.discard_selected_cards();
       console.log("damage : ",card.get_damage_value().toString(), "mult : ", card.get_mult().toString())
-      handleDelay();
+      score_animation();
       disable_description()
     }
     
@@ -322,12 +322,17 @@ return score_string;
 }
 
 
-const handleDelay = () => {
-  set_score_anim(1);
+const score_animation = () => {
+  set_score_anim(0);
     setTimeout(() => {
       console.log('Délai écoulé - 2 secondes');
-      set_score_anim(0);
-    }, 2000);
+      set_score_anim(1);
+        setTimeout(() => {
+          console.log('Délai écoulé - 2 secondes');
+          set_score_anim(0);
+          set_enemy_life(enemy_life - (damage*mult));
+        }, 600);
+    }, 600);
 
   }
 
