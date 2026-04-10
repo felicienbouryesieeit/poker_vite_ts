@@ -320,6 +320,7 @@ enemy_life
   return (
     <div  className="app">
       <div>{'enemy life : '+enemy_life.toString()}</div>
+      <div>{'100 x 100'}</div>
     <CardList cards={pokerHand}/>
     <CardList cards={skillHand}/>
     <div>
