@@ -236,6 +236,7 @@ const ClickActionButton = (index: number) => {
     let skillreturn : SkillReturn = card.activateskill(Gamemanager_var.create_selected_cards_list());
     if (skillreturn.isvalid==true) {
       Gamemanager_var.discard_selected_cards();
+      console.log("damage : ",card.get_damage_value().toString(), "mult : ", card.get_mult().toString())
       disable_description()
     }
 
@@ -303,12 +304,6 @@ const ActionButtonList = () => (
       ActionButtons.map((currentbutton, index) => (
           <button 
             key={index}
-            //className="action-button"
-            style={{
-              //backgroundImage: `url('${card.image}')`,
-              //transform: card.is_translate_Y() ? 'translateY(-30px)' : 'translateY(0)'
-              //'${card.get_is_selected()}
-            }}
             onClick={() => ClickActionButton(index)}
           >
             {currentbutton}
