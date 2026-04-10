@@ -325,7 +325,7 @@ const ActionButtonList = () => (
     <CardList cards={pokerHand}/>
     <CardList cards={skillHand}/>
     <div>
-          <div>
+          <div className="description">
             {description}
           </div>
           <div><ActionButtonList/></div>
