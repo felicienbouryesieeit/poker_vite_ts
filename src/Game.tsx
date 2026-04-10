@@ -84,7 +84,7 @@ const Spawn_poker_deck = () => {
     if (isBegin==true) {
     
     setIsBegin(false)
-    set_enemy_life(100);
+    set_enemy_life(10);
     Gamemanager_var.create_poker_hand();
     Gamemanager_var.create_skill_hand();
     
