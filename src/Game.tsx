@@ -35,6 +35,7 @@ const get_language_int = () => {
   const[description_card, setdescription_card] = useState<Cardpar | null>(null);
 
   const [enemy_life, set_enemy_life] = useState(100);
+  const [player_life, set_player_life] = useState(100);
   const [mult, set_mult] = useState(0);
   const [damage, set_damage] = useState(0);
   
@@ -315,11 +316,12 @@ const ActionButtonList = () => (
 enemy_life
 set_mult
 set_damage
+set_player_life
 
   return (
     <div  className="app">
       <div className="top-stats">
-      <div>{'enemy life : '+enemy_life.toString()}</div>
+      <div>{'player life : '+player_life.toString()+'||'+'enemy life : '+enemy_life.toString()}</div>
       <div>{damage.toString()+' x '+mult.toString()}</div>
       </div>
     <CardList cards={pokerHand}/>
