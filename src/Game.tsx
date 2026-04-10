@@ -40,6 +40,7 @@ const get_language_int = () => {
   const [damage, set_damage] = useState(0);
   const [gold, set_gold] = useState(0);
   const [score_anim,set_score_anim] = useState(0);
+  const [is_in_shop, set_is_in_shop] = useState(false);
   
   let Gamemanager_var : GameManager = new GameManager();
   let textcontainer_var : TextContainer = new TextContainer();
@@ -265,11 +266,12 @@ const ClickActionButton = (index: number) => {
           
           if ((enemy_life - (card.damage_value*card.mult))<=0) {
             set_gold(gold+3);
+            set_is_in_shop(true);
             
           }
           enemy_life2 = enemy_life - (card.damage_value*card.mult);
           set_enemy_life(enemy_life2);
-          set_score_anim(0);
+          set_score_anim(0);      
           set_damage(0);
           set_mult(0);
           //enemy_life - (damage*mult)
@@ -392,7 +394,8 @@ set_enemy_life
       <div>{'player life : '+player_life.toString()+' || '+'enemy life : '+enemy_life.toString()}</div>
       <div>{get_score_string()}</div>
       </div>
-    <CardList cards={pokerHand}/>
+    {is_in_shop==false && (<CardList cards={pokerHand}/>)}
+    {is_in_shop==true && (<CardList cards={skillHand}/>)}
     <CardList cards={skillHand}/>
     <div>
           <div className="description">
