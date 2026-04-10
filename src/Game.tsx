@@ -244,7 +244,7 @@ const ClickActionButton = (index: number) => {
       set_mult(card.mult);
       Gamemanager_var.discard_selected_cards();
       //console.log("damage : ",card.get_damage_value().toString(), "mult : ", card.get_mult().toString())
-      set_enemy_life(enemy_life - card.damage_value);
+      set_enemy_life(enemy_life - (card.damage_value*card.mult));
       score_animation();
       disable_description()
     }
