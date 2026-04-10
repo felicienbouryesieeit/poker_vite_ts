@@ -46,7 +46,7 @@ class SkillCardPar extends Cardpar {
     local_desc = local_desc + " "+this.text_container.export_text(language_int,1,1);
     local_desc = this.set_text_numbers(local_desc);
     local_desc = this.text_container.export_item(language_int,this.description_index,0)
-    +"\n"+"\n"+local_desc+
+    +"\n"+"\n"+local_desc+ "u"+
     "\n"+"\n"+this.text_container.export_item(language_int,this.description_index,1)
     +' ('+local_mult.toString()+' '+'mult'+')';
     return local_desc;
