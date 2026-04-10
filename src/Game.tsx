@@ -33,6 +33,8 @@ const get_language_int = () => {
   const [description, setDescription] = useState('')
   
   const[description_card, setdescription_card] = useState<Cardpar | null>(null);
+
+  const [enemy_life, set_enemy_life] = useState(100);
   
   let Gamemanager_var : GameManager = new GameManager();
   let textcontainer_var : TextContainer = new TextContainer();
@@ -180,7 +182,6 @@ const ClickCard = (card: Cardpar) => {
 
   let i = 0
   if (i==1) {
-    golem()
     setpokerHand
     setSkillHand
   }
@@ -314,14 +315,11 @@ const ActionButtonList = () => (
     </div>
 )
 
- const golem = () => {
- };
-
-
 
 
   return (
     <div  className="app">
+      <div>{'enemy life : '+enemy_life.toString()}</div>
     <CardList cards={pokerHand}/>
     <CardList cards={skillHand}/>
     <div>
@@ -329,6 +327,7 @@ const ActionButtonList = () => (
             {description}
           </div>
           <div><ActionButtonList/></div>
+          
           <div>
           <button 
             //key={0}
