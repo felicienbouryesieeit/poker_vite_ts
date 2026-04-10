@@ -12,6 +12,11 @@ class Skill_white_sword extends SkillCardPar {
 
 }
 
+skilleffect() {
+    super.skilleffect();
+    this.damage_value = 11;
+  }
+
 }
 
 export default Skill_white_sword;

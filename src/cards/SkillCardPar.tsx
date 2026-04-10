@@ -98,7 +98,10 @@ class SkillCardPar extends Cardpar {
   }
     return SkillReturnvar;
   }
-
+  
+  skilleffect() {
+    
+  }
 
   set_isvalid(selected_cards : PokerCard[]) {
     let numberisvalid = false;
