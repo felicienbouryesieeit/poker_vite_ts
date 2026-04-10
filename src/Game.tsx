@@ -38,6 +38,7 @@ const get_language_int = () => {
   const [player_life, set_player_life] = useState(10);
   const [mult, set_mult] = useState(0);
   const [damage, set_damage] = useState(0);
+  const [score_anim,set_score_anim] = useState(0);
   
   let Gamemanager_var : GameManager = new GameManager();
   let textcontainer_var : TextContainer = new TextContainer();
@@ -241,6 +242,7 @@ const ClickActionButton = (index: number) => {
       set_mult(card.mult);
       Gamemanager_var.discard_selected_cards();
       console.log("damage : ",card.get_damage_value().toString(), "mult : ", card.get_mult().toString())
+      handleDelay();
       disable_description()
     }
     
@@ -307,16 +309,36 @@ const ActionButtonList = () => (
     </div>
 )
 
+const get_score_string = () => {
+let score_string = '';
+if (score_anim==0) {
+score_string = damage.toString()+' x '+mult.toString();
+}
+
+if (score_anim==1) {
+score_string = (damage*mult).toString();
+}
+return score_string;
+}
+
+
+const handleDelay = () => {
+  set_score_anim(1);
+    setTimeout(() => {
+      console.log('Délai écoulé - 2 secondes');
+      set_score_anim(0);
+    }, 2000);
+
+  }
+
 enemy_life
-set_mult
-set_damage
 set_player_life
 
   return (
     <div  className="app">
       <div className="top-stats">
       <div>{'player life : '+player_life.toString()+' || '+'enemy life : '+enemy_life.toString()}</div>
-      <div>{damage.toString()+' x '+mult.toString()}</div>
+      <div>{get_score_string()}</div>
       </div>
     <CardList cards={pokerHand}/>
     <CardList cards={skillHand}/>
