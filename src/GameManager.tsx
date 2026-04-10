@@ -52,10 +52,10 @@ class GameManager {
   }
 
   create_skill_shop() {
-    this.skill_hand = [];
+    this.skill_shop = [];
     for(let i =0; i<3;i++) {
       let current_skill = new Skill_white_sword();
-      this.skill_hand.push(current_skill);
+      this.skill_shop.push(current_skill);
     }
   }
 
