@@ -325,7 +325,11 @@ return score_string;
 
 
 const score_animation = () => {
+  let local_damage = damage*mult;
+  set_enemy_life(enemy_life - local_damage);
+  /*
   set_score_anim(0);
+
   let delay = 400; 
     setTimeout(() => {
       console.log('Délai écoulé - 2 secondes');
@@ -333,10 +337,9 @@ const score_animation = () => {
         setTimeout(() => {
           console.log('Délai écoulé - 2 secondes');
           set_score_anim(0);
-          let local_damage = damage*mult;
-          set_enemy_life(enemy_life - local_damage);//enemy_life - (damage*mult)
+          //enemy_life - (damage*mult)
         }, delay);
-    }, delay);
+    }, delay);*/
 
   }
 
