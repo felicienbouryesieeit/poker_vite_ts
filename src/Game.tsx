@@ -346,7 +346,7 @@ const ActionButtonList = () => (
 
 const get_score_string = () => {
 let score_string = '';
-if (score_anim==0) {
+if (score_anim==0 || score_anim==2) {
 score_string = damage.toString()+' x '+mult.toString();
 }
 
