@@ -260,8 +260,10 @@ const ClickActionButton = (index: number) => {
       set_score_anim(1);
         setTimeout(() => {
           //console.log('Délai écoulé - 2 secondes');
-          set_enemy_life(enemy_life - (card.damage_value*card.mult));
-          if (enemy_life<=0) {
+          let enemy_life2 = enemy_life;
+          enemy_life2 = enemy_life - (card.damage_value*card.mult)
+          set_enemy_life(enemy_life2);
+          if (enemy_life2<=0) {
             set_gold(gold+3);
             
           }
