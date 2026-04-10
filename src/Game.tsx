@@ -203,7 +203,7 @@ const CardList = ({ cards }: { cards: Cardpar[] }) => (
             className="action-button"
             style={{
               backgroundImage: `url('${card.image}')`,
-              transform: card.is_translate_Y() ? 'translateY(-30px)' : 'translateY(0)'
+              transform: card.is_translate_Y() ? 'translateY(-10px)' : 'translateY(0)'
               //'${card.get_is_selected()}
             }}
             onClick={() => ClickCard(card)}
