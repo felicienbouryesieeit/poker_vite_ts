@@ -124,6 +124,7 @@ const ClickEndTurn = () => {
  Spawn_poker_deck();
  setpokerDeck(Gamemanager_var.poker_deck);
  setpokerHand2(Gamemanager_var.poker_hand);
+ set_player_life(player_life-1);
 
  
  
@@ -324,6 +325,7 @@ return score_string;
 
 const score_animation = () => {
   set_score_anim(0);
+  let delay = 200; 
     setTimeout(() => {
       console.log('Délai écoulé - 2 secondes');
       set_score_anim(1);
@@ -331,8 +333,8 @@ const score_animation = () => {
           console.log('Délai écoulé - 2 secondes');
           set_score_anim(0);
           set_enemy_life(enemy_life - (damage*mult));
-        }, 600);
-    }, 600);
+        }, delay);
+    }, delay);
 
   }
 
