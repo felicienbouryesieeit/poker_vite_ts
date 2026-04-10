@@ -394,7 +394,7 @@ set_enemy_life
       <div>{'player life : '+player_life.toString()+' || '+'enemy life : '+enemy_life.toString()}</div>
       <div>{get_score_string()}</div>
       </div>
-    {is_in_shop==false && (<CardList cards={pokerHand}/>)}
+    {is_in_shop==true && (<CardList cards={pokerHand}/>)}
     {is_in_shop==true && (<CardList cards={skillHand}/>)}
     <CardList cards={skillHand}/>
     <div>
