@@ -315,7 +315,7 @@ const ActionButtonList = () => (
     </div>
 )
 
-
+enemy_life
 
   return (
     <div  className="app">
