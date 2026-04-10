@@ -318,6 +318,8 @@ const ActionButtonList = () => (
 )
 
 enemy_life
+set_mult
+set_damage
 
   return (
     <div  className="app">
