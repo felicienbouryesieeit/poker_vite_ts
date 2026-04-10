@@ -11,7 +11,8 @@ class SkillCardPar extends Cardpar {
   poker_cards_number_type : number;
   mult : number;
   upgrade_mult:number;
-  is_attack : boolean;
+  damage_value : number;
+  //is_attack : boolean;
 
   constructor() {
     super();
@@ -20,9 +21,9 @@ class SkillCardPar extends Cardpar {
 
     this.poker_cards_number=1;
     this.poker_cards_number_type=0;
-    this.mult = 10;
-    this.upgrade_mult=5;
-    this.is_attack = true;
+    this.mult = 3;
+    this.upgrade_mult=1;
+    this.damage_value = 0;
 
 
     this.image = '/skills/white_sword.png';
@@ -31,6 +32,10 @@ class SkillCardPar extends Cardpar {
 
   get_mult() {
     return this.mult
+  }
+
+  get_damage_value() {
+    return this.damage_value
   }
 
   
@@ -53,6 +58,7 @@ class SkillCardPar extends Cardpar {
     let local_string_2 = '';
     let string_array = local_string.split('')
     let local_number = this.poker_cards_number;
+    let local_damage_value = this.damage_value;
 
     string_array.forEach(character => {
       let string_to_add = character
@@ -66,6 +72,12 @@ class SkillCardPar extends Cardpar {
         } else {
           string_to_add = ''
         }
+      }
+
+      if (string_to_add=='£') {
+        
+          string_to_add = local_damage_value.toString();
+        
       }
 
       local_string_2 = local_string_2 + string_to_add
