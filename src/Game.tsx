@@ -370,7 +370,7 @@ local_life = enemy_life2;
 local_life = enemy_life;
 }
 
-  return enemy_life;
+  return local_life;
 } 
 
 enemy_life
