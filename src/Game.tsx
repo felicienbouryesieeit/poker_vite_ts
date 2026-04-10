@@ -364,10 +364,10 @@ const get_damage = () => {
 
 const get_enemy_life = () => {
   let local_life=0;
-  if (score_anim==2) {
-local_life = enemy_life2;
-} else {
+  if (score_anim==0) {
 local_life = enemy_life;
+} else {
+local_life = enemy_life2;
 }
 
   return local_life;
