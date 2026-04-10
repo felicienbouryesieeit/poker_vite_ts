@@ -323,7 +323,7 @@ score_string = (damage*mult).toString();
 return score_string;
 }
 
-
+set_score_anim
 const score_animation = () => {
   let local_damage = damage*mult;
   set_enemy_life(enemy_life - local_damage);
