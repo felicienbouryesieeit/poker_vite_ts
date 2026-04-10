@@ -27,6 +27,9 @@ const get_language_int = () => {
   const[pokerDeck, setpokerDeck] = useState<PokerCard[]>([]);
 
   const[skillHand, setSkillHand] = useState<SkillCardPar[]>([]);
+
+  const[skillshop, setSkillshop] = useState<SkillCardPar[]>([]);
+
   const [isBegin, setIsBegin] = useState(true);
 
 
@@ -88,7 +91,8 @@ const Spawn_poker_deck = () => {
     set_enemy_life(10);
     Gamemanager_var.create_poker_hand();
     Gamemanager_var.create_skill_hand();
-    
+    Gamemanager_var.create_skill_shop();
+    setSkillshop(Gamemanager_var.skill_shop);
     setSkillHand(Gamemanager_var.skill_hand);
     setpokerDeck(Gamemanager_var.poker_deck);
     setpokerHand2(Gamemanager_var.poker_hand);
@@ -156,44 +160,16 @@ const ClickCard = (card: Cardpar) => {
 }
 
   if (card instanceof SkillCardPar) {
-    /*
-    Gamemanager_var.set_poker_deck(pokerDeck);
-    Gamemanager_var.set_poker_hand(pokerHand2);
-    Gamemanager_var.set_skill_hand(skillHand);
-    //Gamemanager_var.unselect_all_skills();
-    //card.set_is_selected(true);
     
-    let didi = 0
-    didi =get_language_int()
-    
-     //card.get_card_description()
-    setSkillHand(Gamemanager_var.skill_hand)
-    let skillreturn : SkillReturn = card.activateskill(Gamemanager_var.create_selected_cards_list());
-    if (skillreturn.isvalid==true) {
-      Gamemanager_var.discard_selected_cards();
-    }*/
-
-    
-    /*
-    pokerHand2.forEach(card  => {
-      
-    });*/
 
     
     setpokerHand2(Gamemanager_var.poker_hand);
     setpokerDeck(Gamemanager_var.poker_deck);
-    //reset_poker_deck(); 
+    
   }
-  //Discard_poker_card(card.index);
 
   reset_poker_deck();
 
-  let i = 0
-  if (i==1) {
-    setpokerHand
-    setSkillHand
-  }
-  
 };
 const CardList = ({ cards }: { cards: Cardpar[] }) => (
   <div className="button-container"> 
@@ -233,11 +209,6 @@ const ClickActionButton = (index: number) => {
     Gamemanager_var.set_poker_deck(pokerDeck);
     Gamemanager_var.set_poker_hand(pokerHand2);
     Gamemanager_var.set_skill_hand(skillHand);
-    //Gamemanager_var.unselect_all_skills();
-    //card.set_is_selected(true);
-    
-    
-     //card.get_card_description()
     setSkillHand(Gamemanager_var.skill_hand)
     let skillreturn : SkillReturn = card.activateskill(Gamemanager_var.create_selected_cards_list());
     if (skillreturn.isvalid==true) {
@@ -299,39 +270,6 @@ const ClickActionButton = (index: number) => {
 
   reset_poker_deck();
 
-  //console.log("liverson")
-  /*
-  if (index==0) {
-  if (description_card!=null) {
-    let card = description_card
-  if (card instanceof SkillCardPar) {
-    
-    Gamemanager_var.set_poker_deck(pokerDeck);
-    Gamemanager_var.set_poker_hand(pokerHand2);
-    Gamemanager_var.set_skill_hand(skillHand);
-    //Gamemanager_var.unselect_all_skills();
-    //card.set_is_selected(true);
-    
-    let didi = 0
-    
-     //card.get_card_description()
-    setSkillHand(Gamemanager_var.skill_hand)
-    let skillreturn : SkillReturn = card.activateskill(Gamemanager_var.create_selected_cards_list());
-    if (skillreturn.isvalid==true) {
-      Gamemanager_var.discard_selected_cards();
-      disable_description();
-    }
-
-    
-    setpokerHand2(Gamemanager_var.poker_hand);
-    setpokerDeck(Gamemanager_var.poker_deck);
-    reset_poker_deck(); 
-  }
-  //Discard_poker_card(card.index);
-
-  reset_poker_deck();}
-
-  }*/
 }
 
 
@@ -399,7 +337,7 @@ set_enemy_life
       <div>{get_score_string()}</div>
       </div>
     {get_is_in_shop()==false && (<CardList cards={pokerHand}/>)}
-    {get_is_in_shop()==true && (<CardList cards={skillHand}/>)}
+    {get_is_in_shop()==true && (<CardList cards={skillshop}/>)}
     <CardList cards={skillHand}/>
     <div>
           <div className="description">

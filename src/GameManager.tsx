@@ -7,6 +7,7 @@ class GameManager {
   poker_deck: PokerCard[] = [];
   poker_hand : PokerCard[] = [];
   skill_hand : SkillCardPar[] = [];
+  skill_shop : SkillCardPar[] = [];
 
   
   constructor() {
@@ -37,10 +38,22 @@ class GameManager {
     this.skill_hand = new_hand;
   }
 
+  set_skill_shop(new_hand : SkillCardPar[]) {
+    this.skill_shop = new_hand;
+  }
+
 
   create_skill_hand() {
     this.skill_hand = [];
     for(let i =0; i<2;i++) {
+      let current_skill = new Skill_white_sword();
+      this.skill_hand.push(current_skill);
+    }
+  }
+
+  create_skill_shop() {
+    this.skill_hand = [];
+    for(let i =0; i<3;i++) {
       let current_skill = new Skill_white_sword();
       this.skill_hand.push(current_skill);
     }
@@ -93,12 +106,6 @@ class GameManager {
     }
   }
 
-/*
- unselect_all_skills() {
-  this.skill_hand.forEach(card => {
-    card.is_selected=false;
-  });
- }*/
 
 }
 export default GameManager;
