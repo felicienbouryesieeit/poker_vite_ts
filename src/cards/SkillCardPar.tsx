@@ -100,7 +100,7 @@ class SkillCardPar extends Cardpar {
   }
   
   skilleffect(selected_cards : PokerCard[]) {
-    
+    selected_cards
   }
 
   set_isvalid(selected_cards : PokerCard[]) {
