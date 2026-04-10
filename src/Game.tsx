@@ -243,7 +243,8 @@ const ClickActionButton = (index: number) => {
       set_damage(card.damage_value);
       set_mult(card.mult);
       Gamemanager_var.discard_selected_cards();
-      console.log("damage : ",card.get_damage_value().toString(), "mult : ", card.get_mult().toString())
+      //console.log("damage : ",card.get_damage_value().toString(), "mult : ", card.get_mult().toString())
+      set_enemy_life(enemy_life - card.damage_value);
       score_animation();
       disable_description()
     }
@@ -324,14 +325,14 @@ return score_string;
 }
 
 set_score_anim
-
+/*
 const get_damage = () => {
     return damage;
-}
+}*/
 const score_animation = () => {
   //let local_damage = damage*mult;
   ///let after = enemy_life - local_damage;
-  set_enemy_life(enemy_life - get_damage());
+  
   /*
   set_score_anim(0);
 
