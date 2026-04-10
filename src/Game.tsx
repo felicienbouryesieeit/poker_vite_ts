@@ -319,7 +319,7 @@ const ActionButtonList = () => (
 
   return (
     <div  className="app">
-      <div>{'enemy life : '+enemy_life.toString()}</div>
+      <div>en effet oui</div>
     <CardList cards={pokerHand}/>
     <CardList cards={skillHand}/>
     <div>
