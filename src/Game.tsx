@@ -333,7 +333,7 @@ const score_animation = () => {
         setTimeout(() => {
           console.log('Délai écoulé - 2 secondes');
           set_score_anim(0);
-          set_enemy_life(enemy_life - (damage*mult));
+          set_enemy_life(31);//enemy_life - (damage*mult)
         }, delay);
     }, delay);
 
