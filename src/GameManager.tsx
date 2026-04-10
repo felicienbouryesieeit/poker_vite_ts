@@ -49,7 +49,7 @@ class GameManager {
   create_poker_hand() {
     this.create_poker_deck();
     this.poker_hand = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
     this.draw_random_card();
         
     }
