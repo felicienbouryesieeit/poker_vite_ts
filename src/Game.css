@@ -1,6 +1,11 @@
 .description {
   white-space: pre-line;
 }
+
+.top-stats{
+  background-color: rgb(74, 79, 79);
+  margin-bottom: 15px;
+}
 .action-button{
   
   /*background-image: var(--card);*/

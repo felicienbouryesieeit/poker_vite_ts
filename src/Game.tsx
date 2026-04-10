@@ -319,8 +319,10 @@ enemy_life
 
   return (
     <div  className="app">
+      <div className="top-stats">
       <div>{'enemy life : '+enemy_life.toString()}</div>
       <div>{'100 x 100'}</div>
+      </div>
     <CardList cards={pokerHand}/>
     <CardList cards={skillHand}/>
     <div>
