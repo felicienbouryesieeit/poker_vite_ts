@@ -385,6 +385,10 @@ local_life = enemy_life2;
   return local_life;
 } */
 
+const get_is_in_shop = () => {
+  return is_in_shop;
+}
+
 enemy_life
 set_player_life
 set_enemy_life
@@ -394,8 +398,8 @@ set_enemy_life
       <div>{'player life : '+player_life.toString()+' || '+'enemy life : '+enemy_life.toString()}</div>
       <div>{get_score_string()}</div>
       </div>
-    {is_in_shop==true && (<CardList cards={pokerHand}/>)}
-    {is_in_shop==true && (<CardList cards={skillHand}/>)}
+    {get_is_in_shop()==false && (<CardList cards={pokerHand}/>)}
+    {get_is_in_shop()==true && (<CardList cards={skillHand}/>)}
     <CardList cards={skillHand}/>
     <div>
           <div className="description">
