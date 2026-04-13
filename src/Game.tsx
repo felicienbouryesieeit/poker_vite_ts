@@ -232,7 +232,12 @@ const disable_description = () => {
 const buycard = () => {
   let card = description_card
   if (card instanceof SkillCardPar) {
-    if (is_in_shop==true) {
+    if (card.is_in_shop==true) {
+      Gamemanager_var.set_skill_hand(skillHand);
+      Gamemanager_var.set_skill_shop(skillshop);
+      Gamemanager_var.discard_skill_shop_card(card);
+      setSkillHand(Gamemanager_var.skill_hand);
+      setSkillshop(Gamemanager_var.skill_shop);
       console.log("card is in shop :  ", card.is_in_shop);
     } else {
   //let card = description_card
@@ -334,6 +339,7 @@ const ActionButtonList = () => (
     </div>
 )*/
 
+
 const get_score_string = () => {
 let score_string = '';
 if (score_anim==0 || score_anim==2) {
@@ -365,6 +371,18 @@ local_life = enemy_life2;
 
 const get_is_in_shop = () => {
   return is_in_shop;
+}
+
+const get_shop_string = () => {
+  let shop_string = '';
+  let card = description_card
+  if (card instanceof SkillCardPar) {
+    if (card.is_in_shop==true) {
+      shop_string = 'buy'
+    } else {
+      shop_string = 'sell'
+    }}
+  return shop_string;
 }
 
 const get_enemy_life_string = () => {
@@ -401,7 +419,7 @@ set_enemy_life
 
             {get_is_in_shop()==true && (<button
             onClick={() => buycard()}
-            >buy</button>)}
+            >{get_shop_string()}</button>)}
 
  
             </div>)}
