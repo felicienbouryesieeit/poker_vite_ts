@@ -12,14 +12,10 @@ const Game = ({ get_language}: { get_language: () => void}) => {
 
 
   useEffect(()=>{
-    const token2 = sessionStorage.getItem('token')
-    if (token2) {
       //let data2 = 
       reset_skill_shop();
       //let data : any = JSON.parse(token2)
 
-      
-    }
   },[])
   
 const get_language_int = () => {
