@@ -388,10 +388,20 @@ set_enemy_life
           {is_showing_action_buttons==true && (<div
           //<ActionButtonList/>
           >
-            <button
+            {get_is_in_shop()==false && (<button
             onClick={() => playhand()}
-            >play</button>
+            >play</button>)}
+
+            {get_is_in_shop()==true && (<button
+            onClick={() => playhand()}
+            >buy</button>)}
+
+ 
             </div>)}
+
+            
+
+            
           
           <div>
           <button 
