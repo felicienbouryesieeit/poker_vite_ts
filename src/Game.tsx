@@ -156,7 +156,6 @@ const ClickCard = (card: Cardpar) => {
   if (card.have_description) {
   if (card == description_card) {
     disable_description()
-    set_is_showing_action_buttons(false);
   } else {
   //console.log("description card : ",description_card)
   let local_langage = 0
@@ -191,11 +190,7 @@ const ClickCard = (card: Cardpar) => {
     Gamemanager_var.set_poker_hand(pokerHand2);
     //Gamemanager_var.set_skill_hand(skillHand);
     //console.log("selected cards : ");
-    if (Gamemanager_var.create_selected_cards_list().length==0) {
-
-    } else {
-
-    }
+    
     setpokerHand2(Gamemanager_var.poker_hand);
     setpokerDeck(Gamemanager_var.poker_deck);
   }
@@ -230,22 +225,24 @@ const disable_description = () => {
   if (description_card!=null) {
     setDescription('');
     setdescription_card(null)
+    set_is_showing_action_buttons(false);
   }
 }
-/*
+
 const buycard = () => {
-  let card = description_card
-  if (card instanceof SkillCardPar) {
-
-  }
-}*/
-
-const playhand = () => {
   let card = description_card
   if (card instanceof SkillCardPar) {
     if (is_in_shop==true) {
       console.log("card is in shop :  ", card.is_in_shop);
     } else {
+  //let card = description_card
+  
+}
+
+const playhand = () => {
+  let card = description_card
+  if (card instanceof SkillCardPar) {
+    
     
     Gamemanager_var.set_poker_deck(pokerDeck);
     Gamemanager_var.set_poker_hand(pokerHand2);
@@ -279,6 +276,7 @@ const playhand = () => {
           if ((enemy_life - (card.damage_value*card.mult))<=0) {
             set_gold(gold+3);
             set_is_in_shop(true);
+            disable_description();
             
           }
           enemy_life2 = enemy_life - (card.damage_value*card.mult);
@@ -308,7 +306,7 @@ const playhand = () => {
     setpokerHand2(Gamemanager_var.poker_hand);
     setpokerDeck(Gamemanager_var.poker_deck);
   }
-  }
+  
 
   reset_poker_deck();
 
@@ -369,14 +367,23 @@ const get_is_in_shop = () => {
   return is_in_shop;
 }
 
+const get_enemy_life_string = () => {
+  let local_string = '';
+  if (is_in_shop==false) {
+local_string = ' || '+'enemy life : '+enemy_life.toString();
+  }
+  
+return local_string;
+}
+
 enemy_life
 set_player_life
 set_enemy_life
   return (
     <div  className="app">
       <div className="top-stats">
-      <div>{'player life : '+player_life.toString()+' || '+'enemy life : '+enemy_life.toString()}</div>
-      <div>{get_score_string()}</div>
+      <div>{'player life : '+player_life.toString()+ get_enemy_life_string()}</div>
+      {get_is_in_shop()==false && (<div>{get_score_string()}</div>)}
       </div>
     {get_is_in_shop()==false && (<CardList cards={pokerHand}/>)}
     {get_is_in_shop()==true && (<CardList cards={skillshop}/>)}
@@ -393,7 +400,7 @@ set_enemy_life
             >play</button>)}
 
             {get_is_in_shop()==true && (<button
-            onClick={() => playhand()}
+            onClick={() => buycard()}
             >buy</button>)}
 
  
