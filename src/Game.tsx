@@ -146,6 +146,7 @@ const ClickEndTurn = () => {
 const ClickCard = (card: Cardpar) => {
   
   card.onclick();
+  
   if (card.have_description) {
   if (card == description_card) {
     disable_description()
@@ -166,6 +167,22 @@ const ClickCard = (card: Cardpar) => {
     setpokerHand2(Gamemanager_var.poker_hand);
     setpokerDeck(Gamemanager_var.poker_deck);
     
+  } else if  (card instanceof PokerCard) {
+    /*
+    
+    Gamemanager_var.set_poker_deck(pokerDeck);
+    Gamemanager_var.set_poker_hand(pokerHand2);
+    Gamemanager_var.set_skill_hand(skillHand);
+    setSkillHand(Gamemanager_var.skill_hand)
+    let skillreturn : SkillReturn = card.activateskill(Gamemanager_var.create_selected_cards_list());
+
+    */
+
+
+    Gamemanager_var.set_poker_deck(pokerDeck);
+    Gamemanager_var.set_poker_hand(pokerHand2);
+    Gamemanager_var.set_skill_hand(skillHand);
+    console.log("selected cards : ",Gamemanager_var.create_selected_cards_list())
   }
 
   reset_poker_deck();
