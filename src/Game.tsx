@@ -57,7 +57,24 @@ const get_language_int = () => {
   
   
   
+const Spawn_skill_shop = () => {
+  setSkillshop(prevBoutons => {
+    
+    let filtered : SkillCardPar[] = [];
+    prevBoutons
+    //let filtered : PokerCard[] = [...prevBoutons]; pour pas reset l'array
+    let i = 0;
+    //let filtered = prevBoutons.filter((_, i) => i !== index);
+    Gamemanager_var.skill_shop.forEach((card) => {
+      //card.index = i;
+      //console.log('index : ', card.index);
+      filtered = [...filtered, card];
+      i++;
+    });
 
+    return filtered;
+  });
+}
 
 
 const Spawn_poker_deck = () => {
@@ -119,6 +136,14 @@ Gamemanager_var.set_poker_hand(pokerHand2);
 
 Spawn_poker_deck();
 setpokerHand2(Gamemanager_var.poker_hand);
+}
+
+const reset_skill_shop= () => {
+  
+Gamemanager_var.set_skill_shop(skillshop);
+
+Spawn_skill_shop();
+setSkillshop(Gamemanager_var.skill_shop);
 }
 
 const ClickEndTurn = () => {
@@ -239,6 +264,7 @@ const buycard = () => {
       setSkillHand(Gamemanager_var.skill_hand);
       setSkillshop(Gamemanager_var.skill_shop);
       console.log("card is in shop :  ", card.is_in_shop);
+      reset_skill_shop();
     } else {
   //let card = description_card
     }
