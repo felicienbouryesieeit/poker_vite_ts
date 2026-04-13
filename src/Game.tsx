@@ -304,7 +304,7 @@ const ClickActionButton = (index: number) => {
 
 
 
-
+/*
 const ActionButtonList = () => (
   
   <div 
@@ -320,7 +320,7 @@ const ActionButtonList = () => (
           </button>
         ))}
     </div>
-)
+)*/
 
 const get_score_string = () => {
 let score_string = '';
