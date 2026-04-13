@@ -264,11 +264,13 @@ const buycard = () => {
       setSkillHand(Gamemanager_var.skill_hand);
       setSkillshop(Gamemanager_var.skill_shop);
       console.log("card is in shop :  ", card.is_in_shop);
-      reset_skill_shop();
+      
     } else {
   //let card = description_card
     }
-}}
+}
+reset_skill_shop();
+}
 
 const playhand = () => {
   let card = description_card
