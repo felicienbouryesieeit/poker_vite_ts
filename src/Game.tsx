@@ -375,7 +375,7 @@ set_enemy_life
           //<ActionButtonList/>
           >
             <button>play</button>
-            <button>discard</button>
+            <button>discard 2</button>
             </div>)}
           
           <div>
