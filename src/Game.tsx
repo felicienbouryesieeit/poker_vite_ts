@@ -256,19 +256,19 @@ const disable_description = () => {
 
 const buycard = () => {
   let card = description_card
-  if (card instanceof SkillCardPar) {
-    if (card.is_in_shop==true) {
       Gamemanager_var.set_skill_hand(skillHand);
       Gamemanager_var.set_skill_shop(skillshop);
+  if (card instanceof SkillCardPar) {
+    if (card.is_in_shop==true) {
       Gamemanager_var.discard_skill_shop_card(card);
-      setSkillHand(Gamemanager_var.skill_hand);
-      setSkillshop(Gamemanager_var.skill_shop);
-      console.log("card is in shop :  ", card.is_in_shop);
+      console.log("card is in shop jijiji :  ", card.is_in_shop);
       
     } else {
   //let card = description_card
     }
 }
+      setSkillHand(Gamemanager_var.skill_hand);
+      setSkillshop(Gamemanager_var.skill_shop);
 reset_skill_shop();
 }
 
