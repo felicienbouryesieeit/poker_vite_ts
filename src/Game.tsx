@@ -371,7 +371,12 @@ set_enemy_life
           <div className="description">
             {description}
           </div>
-          {is_showing_action_buttons==true && (<div><ActionButtonList/></div>)}
+          {is_showing_action_buttons==true && (<div
+          //<ActionButtonList/>
+          >
+            <button>play</button>
+            <button>discard</button>
+            </div>)}
           
           <div>
           <button 
