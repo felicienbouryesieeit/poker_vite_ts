@@ -236,8 +236,8 @@ const buycard = () => {
       console.log("card is in shop :  ", card.is_in_shop);
     } else {
   //let card = description_card
-  
-}
+    }
+}}
 
 const playhand = () => {
   let card = description_card
