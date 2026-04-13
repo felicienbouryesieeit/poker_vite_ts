@@ -48,11 +48,11 @@ const get_language_int = () => {
   
   let Gamemanager_var : GameManager = new GameManager();
   let textcontainer_var : TextContainer = new TextContainer();
-  const[ActionButtons, setActionButtons] = useState<string[]>([
+  /*const[ActionButtons, setActionButtons] = useState<string[]>([
     textcontainer_var.export_text(get_language_int(),1,2),
     textcontainer_var.export_text(get_language_int(),1,3)
   ]);
-  setActionButtons
+  setActionButtons*/
   //let description_card : any;
   
   
@@ -374,8 +374,9 @@ set_enemy_life
           {is_showing_action_buttons==true && (<div
           //<ActionButtonList/>
           >
-            <button>play</button>
-            <button>discard 2</button>
+            <button
+            onClick={() => ClickActionButton(0)}
+            >play</button>
             </div>)}
           
           <div>
