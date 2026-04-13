@@ -55,6 +55,7 @@ class GameManager {
     this.skill_shop = [];
     for(let i =0; i<3;i++) {
       let current_skill = new Skill_white_sword();
+      current_skill.is_in_shop = true;
       this.skill_shop.push(current_skill);
     }
   }
@@ -66,6 +67,16 @@ class GameManager {
     this.draw_random_card();
         
     }
+  }
+
+  discard_skill_card(card: SkillCardPar) {
+    const index = this.skill_hand.indexOf(card);
+    this.skill_hand.splice(index, 1);
+  }
+
+  discard_skill_shop_card(card: SkillCardPar) {
+    const index = this.skill_shop.indexOf(card);
+    this.skill_shop.splice(index, 1);
   }
 
   discard_poker_card(card: PokerCard) {

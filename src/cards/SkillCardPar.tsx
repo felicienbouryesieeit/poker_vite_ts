@@ -12,6 +12,7 @@ class SkillCardPar extends Cardpar {
   mult : number;
   upgrade_mult:number;
   damage_value : number;
+  is_in_shop : boolean;
   //is_attack : boolean;
 
   constructor() {
@@ -24,6 +25,7 @@ class SkillCardPar extends Cardpar {
     this.mult = 3;
     this.upgrade_mult=1;
     this.damage_value = 0;
+    this.is_in_shop = false;
 
 
     this.image = '/skills/white_sword.png';

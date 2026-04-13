@@ -128,8 +128,12 @@ const ClickEndTurn = () => {
 
  Gamemanager_var.set_poker_deck(pokerDeck);
  Gamemanager_var.set_poker_hand(pokerHand2);
+ Gamemanager_var.set_skill_shop(skillshop);
  Gamemanager_var.create_poker_hand();
+ Gamemanager_var.create_skill_shop();
+
  Spawn_poker_deck();
+ setSkillshop(Gamemanager_var.skill_shop);
  setpokerDeck(Gamemanager_var.poker_deck);
  setpokerHand2(Gamemanager_var.poker_hand);
  set_player_life(player_life-1);
@@ -229,10 +233,19 @@ const disable_description = () => {
   }
 }
 
-const ClickActionButton = (index: number) => {
-  index
+const buycard = () => {
   let card = description_card
   if (card instanceof SkillCardPar) {
+
+  }
+}
+
+const playhand = () => {
+  let card = description_card
+  if (card instanceof SkillCardPar) {
+    if (is_in_shop==true) {
+      console.log("card is in shop :  ", card.is_in_shop);
+    } else {
     
     Gamemanager_var.set_poker_deck(pokerDeck);
     Gamemanager_var.set_poker_hand(pokerHand2);
@@ -294,6 +307,7 @@ const ClickActionButton = (index: number) => {
     
     setpokerHand2(Gamemanager_var.poker_hand);
     setpokerDeck(Gamemanager_var.poker_deck);
+  }
   }
 
   reset_poker_deck();
@@ -375,7 +389,7 @@ set_enemy_life
           //<ActionButtonList/>
           >
             <button
-            onClick={() => ClickActionButton(0)}
+            onClick={() => playhand()}
             >play</button>
             </div>)}
           
