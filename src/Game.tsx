@@ -44,6 +44,7 @@ const get_language_int = () => {
   const [gold, set_gold] = useState(0);
   const [score_anim,set_score_anim] = useState(0);
   const [is_in_shop, set_is_in_shop] = useState(false);
+  const [is_showing_action_buttons, set_is_showing_action_buttons] = useState(false);
   
   let Gamemanager_var : GameManager = new GameManager();
   let textcontainer_var : TextContainer = new TextContainer();
@@ -151,12 +152,14 @@ const ClickCard = (card: Cardpar) => {
   if (card.have_description) {
   if (card == description_card) {
     disable_description()
+    set_is_showing_action_buttons(false);
   } else {
   //console.log("description card : ",description_card)
   let local_langage = 0
   local_langage = get_language_int()
   setDescription(card.get_description(local_langage));
   setdescription_card(card);
+  set_is_showing_action_buttons(true);
   }
   
 }
@@ -183,7 +186,12 @@ const ClickCard = (card: Cardpar) => {
     Gamemanager_var.set_poker_deck(pokerDeck);
     Gamemanager_var.set_poker_hand(pokerHand2);
     //Gamemanager_var.set_skill_hand(skillHand);
-    console.log("selected cards : ",Gamemanager_var.create_selected_cards_list());
+    //console.log("selected cards : ");
+    if (Gamemanager_var.create_selected_cards_list().length==0) {
+
+    } else {
+
+    }
     setpokerHand2(Gamemanager_var.poker_hand);
     setpokerDeck(Gamemanager_var.poker_deck);
   }
@@ -363,7 +371,7 @@ set_enemy_life
           <div className="description">
             {description}
           </div>
-          <div><ActionButtonList/></div>
+          {is_showing_action_buttons==true && (<div><ActionButtonList/></div>)}
           
           <div>
           <button 
