@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import  { useEffect,useState } from 'react';
 import './Game.css';
 import PokerCard from './cards/PokerCard';
 import SkillCardPar from './cards/SkillCardPar';
@@ -11,7 +11,16 @@ import TextContainer from './TextContainer.tsx';
 const Game = ({ get_language}: { get_language: () => void}) => {
 
 
+  useEffect(()=>{
+    const token2 = sessionStorage.getItem('token')
+    if (token2) {
+      //let data2 = 
+      reset_skill_shop();
+      //let data : any = JSON.parse(token2)
 
+      
+    }
+  },[])
   
 const get_language_int = () => {
     const result : any = get_language();
@@ -267,8 +276,6 @@ const buycard = () => {
   //let card = description_card
     }
 }
-      setSkillHand(Gamemanager_var.skill_hand);
-      setSkillshop(Gamemanager_var.skill_shop);
 reset_skill_shop();
 }
 
