@@ -232,13 +232,13 @@ const disable_description = () => {
     setdescription_card(null)
   }
 }
-
+/*
 const buycard = () => {
   let card = description_card
   if (card instanceof SkillCardPar) {
 
   }
-}
+}*/
 
 const playhand = () => {
   let card = description_card
