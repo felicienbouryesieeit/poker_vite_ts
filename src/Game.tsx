@@ -183,6 +183,8 @@ const ClickCard = (card: Cardpar) => {
     Gamemanager_var.set_poker_hand(pokerHand2);
     Gamemanager_var.set_skill_hand(skillHand);
     console.log("selected cards : ",Gamemanager_var.create_selected_cards_list())
+    setpokerHand2(Gamemanager_var.poker_hand);
+    setpokerDeck(Gamemanager_var.poker_deck);
   }
 
   reset_poker_deck();
