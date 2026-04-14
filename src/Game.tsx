@@ -9,7 +9,6 @@ import TextContainer from './TextContainer.tsx';
 //import Comments from './Comments.tsx';
 
 const Game = ({ get_language}: { get_language: () => void}) => {
-  const [count, setCount] = useState(0);
 
   useEffect(()=>{
       //let data2 = 
@@ -53,6 +52,22 @@ const get_language_int = () => {
   
   let Gamemanager_var : GameManager = new GameManager();
   let textcontainer_var : TextContainer = new TextContainer();
+
+
+  const [buttons, setButtons] = useState<SkillCardPar[]>([]);
+
+  const addButton = () => {
+    const skill = new SkillCardPar();
+    if (skill) {
+      //setButtons([...buttons, skill]);
+      setSkillHand([...skillHand, skill]);
+    }
+  };
+
+  const removeButton = () => {
+    setButtons(skillHand.slice(0, -1));
+  };
+
   /*const[ActionButtons, setActionButtons] = useState<string[]>([
     textcontainer_var.export_text(get_language_int(),1,2),
     textcontainer_var.export_text(get_language_int(),1,3)
@@ -477,15 +492,42 @@ set_enemy_life
 
 
 
+
+
+
+
+
+
     <div>
-      <button onClick={() => setCount(count + 1)}>Ajouter un bouton</button>
-      <button onClick={() => setCount(Math.max(0, count - 1))}>Enlever un bouton</button>
+      <button onClick={addButton}>Ajouter un bouton</button>
+      <button onClick={removeButton}>Enlever un bouton</button>
       
-      {Array.from({ length: count }).map((_, i) => (
+      {buttons.map((label, index) => (
+        <button key={index} onClick={() => alert(`Vous avez cliqué sur : ${label}`)}>
+          {'label'}
+        </button>
+      ))}
+      
+      {buttons.length === 0 && <p>Liste vide</p>}
+    </div>
+
+
+
+
+
+
+
+
+    <div>
+      
+      {/*Array.from({ length: count }).map((_, i) => (
         <button key={i} onClick={() => alert(`Bouton ${i + 1}`)}>
           Bouton {i + 1}
         </button>
-      ))}
+      ))*/}
+    </div>
+    <div>
+      
     </div>
 
     
