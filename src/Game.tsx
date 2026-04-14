@@ -54,7 +54,7 @@ const get_language_int = () => {
   let textcontainer_var : TextContainer = new TextContainer();
 
 
-  const [buttons, setButtons] = useState<SkillCardPar[]>([]);
+  //const [buttons, setButtons] = useState<SkillCardPar[]>([]);
 
   const addButton = () => {
     console.log("added skill !")
@@ -66,7 +66,7 @@ const get_language_int = () => {
   };
 
   const removeButton = () => {
-    setButtons(skillHand.slice(0, -1));
+    setSkillHand(skillHand.slice(0, -1));
   };
 
   /*const[ActionButtons, setActionButtons] = useState<string[]>([
@@ -503,13 +503,16 @@ set_enemy_life
       <button onClick={addButton}>Ajouter un bouton</button>
       <button onClick={removeButton}>Enlever un bouton</button>
       
-      {buttons.map((label, index) => (
+      {
+        /*
+      buttons.map((label, index) => (
         <button key={index} onClick={() => alert(`Vous avez cliqué sur : ${label}`)}>
           {'label'}
         </button>
-      ))}
+      ))
+      */}
       
-      {buttons.length === 0 && <p>Liste vide</p>}
+      {/*buttons.length === 0 && <p>Liste vide</p>*/}
     </div>
 
 
