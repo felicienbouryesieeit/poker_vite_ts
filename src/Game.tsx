@@ -57,6 +57,7 @@ const get_language_int = () => {
   const [buttons, setButtons] = useState<SkillCardPar[]>([]);
 
   const addButton = () => {
+    console.log("added skill !")
     const skill = new SkillCardPar();
     if (skill) {
       //setButtons([...buttons, skill]);
