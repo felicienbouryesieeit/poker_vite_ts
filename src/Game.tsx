@@ -9,7 +9,7 @@ import TextContainer from './TextContainer.tsx';
 //import Comments from './Comments.tsx';
 
 const Game = ({ get_language}: { get_language: () => void}) => {
-
+  const [count, setCount] = useState(0);
 
   useEffect(()=>{
       //let data2 = 
@@ -474,6 +474,21 @@ set_enemy_life
     <div>
       {'gold :'+gold.toString()}
     </div>
+
+
+
+    <div>
+      <button onClick={() => setCount(count + 1)}>Ajouter un bouton</button>
+      <button onClick={() => setCount(Math.max(0, count - 1))}>Enlever un bouton</button>
+      
+      {Array.from({ length: count }).map((_, i) => (
+        <button key={i} onClick={() => alert(`Bouton ${i + 1}`)}>
+          Bouton {i + 1}
+        </button>
+      ))}
+    </div>
+
+    
     
     </div>
   );
